@@ -1,0 +1,33 @@
+package lanqiaobei14;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+
+public class Test1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+		 int n=scan.nextInt();
+		ArrayList<Integer> re=new ArrayList<Integer>();
+		two(n,re);
+		 System.out.println(re.get(0));
+		 System.out.println(re.get(1));
+		 System.out.println(re.get(2));
+		 System.out.println(re.get(3));
+		 System.out.println(re.get(4));
+	      scan.close();
+	}
+	public static void two(int n,ArrayList<Integer> re) {
+		while (n<=0) {
+			int a=n%2;
+			re.add(a);
+			n=n/2;
+		}
+		Collections.reverse(re);
+	}
+
+}

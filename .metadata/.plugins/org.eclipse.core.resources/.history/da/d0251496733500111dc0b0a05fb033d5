@@ -1,0 +1,127 @@
+package lanqiaobei14;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+
+
+public class Test5 {
+	private static int N;
+ 	private static int [] x_dire= {0,1,0,-1};
+	private static int [] y_dire= {1,0,-1,0};
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+		 N=scan.nextInt();
+		int G1[][]=new int [N][N];
+		int G2[][]=new int [N][N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				G1[i][j]=scan.nextInt();
+			}
+			
+		}
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				G2[i][j]=scan.nextInt();
+			}
+			
+		}
+		boolean[][]visited1=new boolean[N][N];
+		boolean[][]visited2=new boolean[N][N];
+		ArrayList<int[]> recoreds1=new ArrayList<int[]>();
+		ArrayList<int[]> recoreds2=new ArrayList<int[]>();
+		 
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (G1[i][j]==1&&visited1[i][j]==false) {
+					int edge[]={-1,-1};
+					int count=DFS(G1, i, j,edge, visited1);
+					int recore[]=new int[3];
+					if (edge[0]==-1||edge[1]==-1) {
+						recore[0]=i;
+						recore[1]=j;
+						recore[2]=count;
+						recoreds1.add(recore);
+					}
+					else {
+						recore[0]=edge[0];
+						recore[1]=edge[1];
+						recore[2]=count;
+						recoreds1.add(recore);
+					}
+					
+				}
+			}
+		}
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (G2[i][j]==1&&visited2[i][j]==false) {
+					int edge[]={-1,-1};
+					int count=DFS(G2, i, j,edge, visited2);
+					int recore[]=new int[3];
+					if (edge[0]==-1||edge[1]==-1) {
+						recore[0]=i;
+						recore[1]=j;
+						recore[2]=count;
+						recoreds2.add(recore);
+					}
+					else {
+						recore[0]=edge[0];
+						recore[1]=edge[1];
+						recore[2]=count;
+						recoreds2.add(recore);
+					}
+				}
+			}
+		}
+		Collections.sort(recoreds1,(a,b)->Integer.compare(b[2],a[2]));
+		Collections.sort(recoreds2,(a,b)->Integer.compare(b[2],a[2]));
+		int result=0;
+		for (int i = 0; i < Math.min(recoreds1.size(), recoreds2.size()); i++) {
+			int x1=recoreds1.get(i)[0];
+			int y1=recoreds1.get(i)[1];
+			int count1=recoreds1.get(i)[2];
+			int x2=recoreds2.get(i)[0];
+			int y2=recoreds2.get(i)[1];
+			int count2=recoreds2.get(i)[2];
+			if ((x1==0||x1==N-1||y1==0||y1==N-1)&&(x2==0||x2==N-1||y2==0||y2==N-1)) {
+				result=count1+count2;
+			}
+		}
+		System.out.println(result);
+		
+//		int count=DFS(G1, 0,1,visited1);
+//		for (int i = 0; i < N; i++) {
+//			for (int j = 0; j < N; j++) {
+//				System.out.print(visited1[i][j]);
+//			}
+//			System.out.println();
+//		}
+//		System.out.println(count);
+        scan.close();
+	}
+	
+	public static int DFS(int G[][],int x,int y,int []edge,boolean visited[][]) {
+		if(x>=N||x<0||y>=N||y<0||G[x][y]==0||visited[x][y]==true) {		
+			return 0;
+		}
+		visited[x][y]=true;
+		if (edge[0]==-1&&(x==0||x==N-1||y==0||y==N-1)){
+			edge[0]=x;
+			edge[0]=y;
+		}
+		int count=1;
+		for (int i = 0; i < 4; i++) {
+			int tx=x+x_dire[i];
+			int ty=y+y_dire[i];
+			if (tx<N&&tx>=0&&ty<N&&ty>=0&&G[tx][ty]==1&&visited[tx][ty]==false) {		
+				count+=DFS(G, tx, ty,edge,visited);
+			}
+		}
+		return count;
+	}
+}

@@ -1,0 +1,68 @@
+package practice;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+//哈希表
+public class Test12 {
+	  public static void main(String[] args) {
+	        Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+	        int n=scan.nextInt();
+	        int [] a=new int [n];
+	        Map<Integer, ArrayList<Integer>> hash=new HashMap<Integer, ArrayList<Integer>>();
+	        int count=0;
+	        for (int i = 1; i < n; i++) {
+				int shang=a[i-1];
+				if(a[i]==a[i-1]) {
+					count++;
+				}else {
+					hash.computeIfAbsent(a[i], k->new ArrayList<Integer>()).add(count);
+					count=0;
+				}
+			} 
+	        ArrayList<Integer> key=new ArrayList<Integer>(hash.keySet());
+	        int sum[]=new int[key.size()]; 
+	        for (int i = 0; i < hash.size(); i++) { 
+	        	int crrukey=key.get(i);
+				ArrayList<Integer > value=hash.get(crrukey);
+				int twomaxadd=maxtwonum(value);
+				sum[i]=twomaxadd*crrukey;
+			}
+	        int result=0;
+	        for (int i = 0; i < sum.length; i++) {
+				if(sum[i]>result) {
+					result=sum[i];
+				}
+			}
+	        
+	        System.out.println(result);
+	        scan.close();
+	    }
+	  public static int maxtwonum(ArrayList<Integer> list) {
+		  int len=list.size();
+		  if(len<2) {
+			  return list.get(0);
+		  }
+		  else if(len==2) {
+			  return list.get(0)+list.get(1);
+		  }
+		  else {
+			  int max[]=new int [2];
+			  for (int i = 0; i < 2; i++) {
+				  int m=0;
+				  int index=0;
+				for (int j = 0; j < len; j++) {
+					if(list.get(j)>m) {
+						m=list.get(j);
+						index=j;
+					}			        
+				}
+				list.remove(index);
+				max[i]=m;			
+			}
+			  return max[0]+max[1];
+		  }
+	}
+}

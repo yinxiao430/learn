@@ -1,0 +1,92 @@
+package practice;
+//几人寝，几人桌
+import java.util.Scanner;
+//1:无需package
+//2: 类名必须Main, 不可修改
+
+public class Test17 {
+ public static void main(String[] args) {
+     Scanner scan = new Scanner(System.in);
+     //在此输入您的代码...
+     int q=scan.nextInt();
+     int [][]s=new int [q][5];
+     for (int i = 0; i < q; i++) {
+    	 for (int j = 0; j < 5; j++) {
+			s[i][j]=scan.nextInt();
+		}
+	}
+     for (int i = 0; i < q; i++) {
+		int count=0;
+		s[i][4]=s[i][4]*2;
+		int zhuo4=s[i][3];
+		int zhuo3=s[i][4];
+		int ren2=s[i][0];
+		int ren3=s[i][1];
+		int ren4=s[i][2];
+		if (ren4>=zhuo4) {
+			count=zhuo4*4;
+			if (ren4>zhuo4) {
+				int remainren4=ren4-zhuo4;
+				s[i][2]=remainren4;
+				s[i][3]=0;
+			}
+			else {
+				s[i][2]=0;
+				s[i][3]=0;
+			}
+		}else {
+			count+=ren4*4;
+			int remainzhuo4=zhuo4-ren4;
+			s[i][3]=remainzhuo4;
+			s[i][2]=0;
+		}
+		
+		if (ren3>=zhuo3) {
+			count=+zhuo3*3;
+			if (ren3>zhuo3) {
+				int remainren3=ren3-zhuo3;
+				s[i][4]=0;
+				s[i][1]=remainren3;
+			}
+			else {
+				s[i][4]=0;
+				s[i][1]=0;
+			}
+		}else {
+			count+=ren3*3;
+			int remainzhuo3=zhuo3-ren3;
+			s[i][4]=remainzhuo3;
+			s[i][1]=0;
+		}
+		
+		if (s[i][3]==0&&s[i][4]==0) {
+			System.out.println("xiangdeng"+count);
+		}
+		else {
+			if (s[i][3]>0||s[i][4]>0) {
+				if (s[i][3]>0&&s[i][4]>0) {
+					if (s[i][0]>=s[i][3]*2) {
+						count+=s[i][3]*4;
+						if (s[i][0]>s[i][3]*2) {
+							s[i][0]=s[i][0]-s[i][3]*2;
+							s[i][3]=0;
+						}
+						else {
+							s[i][0]=0;
+							s[i][3]=0;
+							System.out.println(count);
+							return;
+						}
+														
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+     scan.close();
+ }
+}

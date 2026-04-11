@@ -1,0 +1,79 @@
+//最小生成树（MST）
+package practice;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
+public class Test11 {
+	private static double M=9999;
+	private static ArrayList<Double> result=new ArrayList<Double>();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+		int n=scan.nextInt();
+		double xyz[][]=new double [n][3];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < 3; j++) {
+				xyz[i][j]=scan.nextInt();
+			}
+		}
+		double w[][]= new double [n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = i; j < n; j++) {
+				if(distance(xyz[i], xyz[j])<=0) {w[i][j]=0;}
+				else {
+					w[i][j]=distance(xyz[i], xyz[j]);
+					w[j][i]=w[i][j];
+				}
+			}
+		}
+		prim(n,w);
+		double sum=0;
+		for (int i = 0; i < result.size(); i++) {
+			sum=sum+result.get(i);
+		}
+		System.out.printf("%.2f\n",sum);
+        scan.close();
+	}
+	public static double distance(double a[],double b[]) {
+		double bian1=a[0]-b[0];
+		double bian2=a[1]-b[1];
+		double d=Math.hypot(bian1, bian2);//sqrt(x2 +y2) 
+		double d_r=d-a[2]-b[2];
+		return d_r;
+	}
+	//贪心
+	public static void prim(int n,double w[][]) {
+		int clo[]=new int[n];
+		double low[]=new double[n];
+		for (int i = 1; i < n; i++) {
+			low[i]=w[0][i];
+			clo[i]=0;
+		}
+		clo[0]=-1;
+		for (int i = 1; i < n; i++) {
+			double min=M;
+			int index=0;
+			for (int j = 0; j < n; j++) {
+				if(clo[j]!=-1&&low[j]<min) {
+					min=low[j];
+					index=j;
+					
+				}
+			}
+			result.add(low[index]);
+			clo[index]=-1;
+			for (int j = 1; j < n; j++) {
+				if(clo[j]!=-1&&low[j]>w[index][j]) {
+					clo[j]=index;
+					low[j]=w[index][j];
+				}
+			}
+		}
+		
+	}
+
+}

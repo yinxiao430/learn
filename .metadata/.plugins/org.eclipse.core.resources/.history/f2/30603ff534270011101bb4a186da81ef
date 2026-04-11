@@ -1,0 +1,12 @@
+package practice;
+//报数游戏
+public class Test14 {
+
+	public static void main(String[] args) {
+		double a=202420242024d;
+		double b=a/2;
+		double c=b*24;
+		System.out.println(c);
+	}
+
+}

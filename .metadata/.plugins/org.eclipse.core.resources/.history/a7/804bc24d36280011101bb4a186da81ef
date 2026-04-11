@@ -1,0 +1,112 @@
+//package practice;
+////几人寝，几人桌
+//import java.util.Scanner;
+////1:无需package
+////2: 类名必须Main, 不可修改
+//
+//public class Test17 {
+// public static void main(String[] args) {
+//     Scanner scan = new Scanner(System.in);
+//     //在此输入您的代码...
+//     int q=scan.nextInt();
+//     int [][]s=new int [q][5];
+//     for (int i = 0; i < q; i++) {
+//    	 for (int j = 0; j < 5; j++) {
+//			s[i][j]=scan.nextInt();
+//		}
+//	}
+//     for (int i = 0; i < q; i++) {
+//		int count=0;
+//		int a2=s[i][0];
+//		int a3=s[i][1];
+//		int a4=s[i][2];
+//		int b4=s[i][3];
+//		int b6=s[i][4];
+//		//分配4人
+//		int u4_4=Math.min(a4, b4);
+//		a4-=u4_4;
+//		b4-=u4_4;
+//		count+=u4_4*4;
+//		//分配6人
+//		int b3=b6*2;
+//		int u3_3=Math.min(a3,b3);
+//		a3-=u3_3;
+//		b3-=u3_3;
+//		count+=u3_3*3;
+//		b6=b3/2;
+//        //分配2人
+//		 //4
+//		int b2=b4*2;
+//		int u2_2=Math.min(a2, b2);
+//		a2-=u2_2;
+//		b2-=u2_2;
+//		count+=u2_2*2;
+//		 //6
+//		int 3
+//		
+//     }
+//     scan.close();
+// }
+//}
+package practice;
+import java.util.Scanner;
+
+public class Test17 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int q = scan.nextInt();
+        int[][] s = new int[q][5];
+        
+        for (int i = 0; i < q; i++) {
+            for (int j = 0; j < 5; j++) {
+                s[i][j] = scan.nextInt();
+            }
+        }
+
+        for (int i = 0; i < q; i++) {
+            int count = 0;
+
+            // 原始数量（不修改原数组，避免混乱）
+            int a2 = s[i][0]; // 2人寝
+            int a3 = s[i][1]; // 3人寝
+            int a4 = s[i][2]; // 4人寝
+            int b4 = s[i][3]; // 4人桌
+            int b6 = s[i][4]; // 6人桌
+
+            // ======================
+            // 步骤1：4人寝 优先坐 4人桌
+            // ======================
+            int use4 = Math.min(a4, b4);
+            count += use4 * 4;
+            a4 -= use4;
+            b4 -= use4;
+
+            // ======================
+            // 步骤2：3人寝 优先坐 6人桌（1张6人桌 = 2个3人寝）
+            // ======================
+            int max3in6 = b6 * 2;
+            int use3 = Math.min(a3, max3in6);
+            count += use3 * 3;
+            a3 -= use3;
+            b6 -= (use3 + 1) / 2; // 向上取整
+
+            // ======================
+            // 步骤3：2人寝 坐剩下所有桌子
+            // ======================
+            // 剩下的4人桌：1桌 = 2个2人寝
+            int max2in4 = b4 * 2;
+            int use2_4 = Math.min(a2, max2in4);
+            count += use2_4 * 2;
+            a2 -= use2_4;
+
+            // 剩下的6人桌：1桌 = 3个2人寝
+            int max2in6 = b6 * 3;
+            int use2_6 = Math.min(a2, max2in6);
+            count += use2_6 * 2;
+
+            // 输出答案
+            System.out.println(count);
+        }
+        scan.close();
+    }
+}

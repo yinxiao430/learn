@@ -1,0 +1,98 @@
+package practice;
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Test3 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N=sc.nextInt();
+		int [][]g=new int[N][N];
+		int []n=new int [N];
+		int []w=new int [N];
+		
+		for (int i = 0; i < N; i++) {
+			n[i]=sc.nextInt();
+		}
+		for (int j = 0; j < N; j++) {
+			w[j]=sc.nextInt();
+		}	
+		//编号
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				g[i][j]=i*N+j;
+			}
+		}
+		int x=0;
+		int y=0;
+		boolean [][] vist=new boolean [N][N];
+		ArrayList<Integer> path=DFS(g, vist,x, y, n, w);
+		if(path==null) {System.out.println("path is null");}
+		else {
+			for (int i = 0; i < path.size(); i++) {
+			int p=path.get(i);
+			System.out.println(p);
+		}
+		}
+		
+	}
+	//逻辑，深度优先遍历
+	static int []fangxiang_x= {1,0,-1,0};
+	static int []fangxiang_y= {0,1,0,-1};
+	public static ArrayList<Integer> DFS(int [][]g,boolean [][] vist,int x,int y,int []n,int []w){
+		ArrayList<Integer> path=new ArrayList<Integer>();
+		int N=g.length;	
+		path.add(g[y][x]);
+		
+		//终点逻辑，
+		if(x==N-1&&y==N-1) {
+			vist[N-1][N-1]=true;
+			if(check(g, N, path, n, w)) {
+				return path;
+			}else {
+				path.clear();
+				return null;
+			}
+		
+		}		
+		for (int i = 0; i < 4; i++) {
+			int tx=x+fangxiang_x[i];
+			int ty=y+fangxiang_y[i];
+			if(tx<N&&tx>=0&&ty<N&&ty>=0&&vist[ty][tx]==false) {				
+				vist[ty][tx]=true;				
+				ArrayList<Integer> resPath = DFS(g,vist,tx,ty,n,w);
+				
+				if(resPath !=null) {
+					return resPath;
+				}
+				vist[ty][tx]=false;
+			}
+		}
+		
+		return null;
+	}
+
+	//遍历路径节点看是否符合所给数据
+	public static boolean check(int [][]g,int N,ArrayList<Integer> path,int []n,int []w) {
+		int []wstep=new int[N];
+		int []nstep=new int[N];
+		for (int i = 0; i < path.size(); i++) {
+			int p=path.get(i);
+			int ws=p%N;
+			int ns=p/N;
+			wstep[ws]++;
+			nstep[ns]++;
+		}
+		for (int i = 0; i < N; i++) {
+			if(wstep[i]!=w[i]) {
+				return false;
+			}
+		}
+		for (int i = 0; i < N; i++) {
+			if(nstep[i]!=n[i]) {
+				return true;
+			}
+		}
+		return true;
+	}
+
+}

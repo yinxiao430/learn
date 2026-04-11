@@ -1,0 +1,11 @@
+package practice;
+//报数游戏
+public class Test14 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double a=202420242024;
+		double b=b/2;
+	}
+
+}

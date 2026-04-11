@@ -1,0 +1,20 @@
+package practice;
+
+public class Test7 {
+//B2
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for (int i = 10000; i < 40000000; i++) {
+			long a=20240413;		
+			long b=num(a,i);
+			long N=b-20250412;
+			long d=N+a;
+			if((d%20250412)==0) {
+				System.out.println(N);
+			}	
+		}		
+	}
+	public static long num(long a,int i) {
+		return a*i;
+	}
+}

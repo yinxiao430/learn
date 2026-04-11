@@ -1,0 +1,27 @@
+package practice;
+
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+//
+public class Test24 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+        int n=scan.nextInt();
+        int count=0;
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+			list.add(1);
+		}
+        for (int i = 0; i < list.size(); i++) {
+			if (i%3==0) {
+				list.add(1);
+			}
+		}
+        System.out.println(list.size()-1);
+        scan.close();
+    }
+}

@@ -1,0 +1,33 @@
+package practice;
+
+import java.util.Scanner;
+//2的k次幂
+public class Test13 {
+ public static void main(String[] args) {
+     Scanner scan = new Scanner(System.in);
+     //在此输入您的代码...
+     int n=scan.nextInt();
+     int k=scan.nextInt();
+     int num[]=new int[n];
+     for (int i = 0; i < n; i++) {
+		num[i]=scan.nextInt();
+	}
+     
+     scan.close();
+ }
+ public static int K(int num) {
+	 int count=0;
+	 int a=num;
+	 while (true) {
+		 if (a%2==0) {
+			count++;
+			a=a/2;
+		}
+		 if (a<=0) {
+			break;
+		}
+	}
+	 return count;
+	
+}
+}

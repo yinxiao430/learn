@@ -1,0 +1,77 @@
+package lanqiaobei14;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Test1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Integer> result=new ArrayList<Integer>();
+		for (int n = 1; n < 100000; n++) {
+			ArrayList<Integer> re=new ArrayList<Integer>();
+			ArrayList<Integer> ba=new ArrayList<Integer>();
+			ArrayList<Integer> sn=new ArrayList<Integer>();
+			
+			two(n,re);
+			eigth(n, ba);
+			shin(n,sn);
+			int nre=sum(re);
+			int nba=sum(ba);
+			int nte=ssum(n);
+			int nsn=sum(sn);	
+			if ((n%nre==0)&&(n%nba==0)&&(n%nte==0)&&(n%nsn==0)) {
+				result.add(n);
+			}
+			
+		}
+		
+		System.out.println(result.size());
+	}
+	public static void two(int c,ArrayList<Integer> re) {
+		int n=c;
+		while (n>0) {
+			int a=n%2;
+			re.add(a);
+			n=n/2;
+		}
+		Collections.reverse(re);
+	}
+	public static void eigth(int c,ArrayList<Integer> ba) {
+		int n=c;
+		while (n>0) {
+			int a=n%8;
+			ba.add(a);
+			n=n/8;
+		}
+		Collections.reverse(ba);
+	}
+	public static void shin(int c,ArrayList<Integer> sn) {
+		int n=c;
+		while (n>0) {
+			int a=n%16;
+			sn.add(a);
+			n=n/16;
+		}
+		Collections.reverse(sn);
+	}
+	public static int sum(ArrayList<Integer> array) {
+		int a=array.size();
+		int sum=0;
+		for (int i = 0; i < a; i++) {
+			sum+=array.get(i);
+		}
+		return sum;
+	}
+	public static int ssum(int c) {
+		int n=c;
+		int sum=0;
+		while (n>0) {
+			sum+=n%10;
+			n=n/10;
+		}
+		return sum;
+	}
+}

@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+org.eclipse.eclemma.ui.agent_exclclassloader=sun.reflect.DelegatingClassLoader\:jdk.internal.loader.BuiltinClassLoader\:java.lang.ClassLoader
+org.eclipse.eclemma.ui.agent_excludes=java/**,sun/**,jdk/**,com.sun/**,javax/**,org/**

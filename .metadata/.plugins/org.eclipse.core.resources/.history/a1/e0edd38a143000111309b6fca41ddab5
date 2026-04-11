@@ -1,0 +1,15 @@
+package lanqiaobei14;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		long b=X_2(9);
+		System.out.println(b);
+	}
+	public static long X_2(long count) {
+		
+		int a=2<<count;
+		return a;
+	}
+}

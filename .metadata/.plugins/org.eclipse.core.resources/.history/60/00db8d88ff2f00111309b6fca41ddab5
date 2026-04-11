@@ -1,0 +1,21 @@
+package lanqiaobei14;
+
+import java.util.Scanner;
+
+public class Test1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+		 int n=scan.nextInt();
+		 int a=two(n);
+		 System.out.println(a);
+	      scan.close();
+	}
+	public static int two(int n) {
+		int a=(byte)n;
+		return a;
+	}
+
+}

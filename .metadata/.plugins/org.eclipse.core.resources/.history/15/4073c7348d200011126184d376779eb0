@@ -1,0 +1,38 @@
+package practice;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Test9 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+        int n=scan.nextInt();
+        scan.nextLine();
+        int[] num=new int[n];
+        for (int i = 0; i < n; i++) {
+			num[i]=scan.nextInt();
+		}
+        int date=0;
+        for (int i = 0; i < n; i++) {
+			if (n==num[i]){
+				date=i+1;
+				break;
+			}
+		}
+     
+       int sum=add(n);
+       System.out.println("连加为"+sum);
+       int result=sum-date*2;
+       System.out.println(result);
+        scan.close();
+    }
+    public static int add(int n) {
+    	int sum=0;
+    	for (int i = 1; i <= n; i++) {
+			sum=sum+i;
+		}
+    	return sum;
+	}
+}

@@ -1,0 +1,16 @@
+package lanqiaobei14;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		long a=9;
+		long b=X_2(a);
+		System.out.println(b);
+	}
+	public static long X_2(long count) {
+		
+		int a=2<<count;
+		return a;
+	}
+}

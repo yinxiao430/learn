@@ -1,0 +1,22 @@
+package practice;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Test9 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+        int n=scan.nextInt();
+        scan.nextLine();
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        int[] num=new int[n];
+        for (int i = 0; i < n; i++) {
+			num[i]=scan.nextInt();
+		}
+        Arrays.sort(num);
+        System.out.println(Arrays.toString(num));
+        scan.close();
+    }
+}

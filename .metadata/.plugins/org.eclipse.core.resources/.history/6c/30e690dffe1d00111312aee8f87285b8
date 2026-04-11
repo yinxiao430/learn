@@ -1,0 +1,27 @@
+package practice;
+
+import java.util.Scanner;
+
+public class Test6 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+		int count=0;
+		for (int i = 1; i <= 2025; i++) {
+			int a=i%10;
+			if(shuzi(a)) {
+				count++;
+			}
+		}
+        scan.close();
+	}
+	public static boolean shuzi(int n) {
+		int a=n*n*n;
+		if(a%10==3) {
+			return true;
+		}
+		return false;
+	}
+}

@@ -1,0 +1,77 @@
+package practice;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+import com.sun.tools.javac.code.Attribute.Array;
+public class Test4 {
+
+	public static void main(String[] args) {
+		 Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+		 int N=scan.nextInt();
+		 scan.nextLine();
+		 char [][]p=new char [N][N];
+		 for (int i = 0; i < N; i++) {		
+				 String line=scan.nextLine();
+				p[i]=line.toCharArray();						
+		}
+		 
+		 int count=daoyunum(p, N);
+		 System.out.println(count);
+		 isEdge(p, N);
+		 for (int i = 0; i < N; i++) {
+			 System.out.println(Arrays.toString(p[i]));
+		}
+		
+	     scan.close();
+
+	}
+	static int []fangxiang_x= {1,0,-1,0};
+	static int []fangxiang_y= {0,1,0,-1};
+	public static void dfs(char p[][],boolean visited[][],int x,int y,int N) {
+		if(x>=N||x<0||y>=N||y<0||p[y][x]!='#'||visited[y][x]==true) {		
+			return ;
+		}
+		visited[y][x] = true;
+		for (int i = 0; i < 4; i++) {
+			int tx=x+fangxiang_x[i];
+			int ty=y+fangxiang_y[i];
+			dfs(p, visited, tx, ty, N);
+			
+		}		
+		return;
+	}
+	public static int daoyunum(char p[][],int N) {
+		int count=0;
+		 boolean [][]visited=new boolean [N][N];
+		 for (int i = 0; i < N; i++) {
+			 for (int j = 0; j < N; j++) {
+				if(p[i][j]=='#'&&visited[i][j]==false) {
+					count++;
+					dfs(p, visited, j, i, N);
+				}
+			}
+			
+		}
+		 return count;
+	}
+	public static void isEdge(char p[][],int N) {
+		for (int i = 0; i < N; i++){
+			for (int j = 0; j < N; j++) {
+				if(p[i][j]=='#') {				
+					for (int k = 0; k < 4; k++) {
+						int tx=j+fangxiang_x[k];
+						int ty=i+fangxiang_y[k];
+						if(tx>=0&&tx<N&&ty>=0&&ty<N&&p[ty][tx]=='.') {		
+							p[i][j]='!';
+							break;
+						}	
+					}
+				}
+			}
+		}		
+		return;	
+	}
+	
+}

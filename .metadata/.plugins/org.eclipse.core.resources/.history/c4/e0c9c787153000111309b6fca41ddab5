@@ -1,0 +1,46 @@
+package lanqiaobei14;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Test2 {
+	 public static void main(String[] args) {
+	        Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+	        int T=scan.nextInt();
+	        ArrayList<int []> g=new ArrayList<int []>();
+	        
+	        for (int i = 0; i < T; i++) {
+				int N=scan.nextInt();
+				int A[]=new int[N+2];
+				int sum=0;
+				int count=0;
+				for (int j = 0; j < N; j++) {
+					A[i]=scan.nextInt();
+					sum+=A[i];
+					if (sum%2==0) {
+						count++;
+					}
+				}
+				A[N]=sum;
+				A[N+1]=count;
+				g.add(A);
+			}
+	        for (int i = 0; i < T; i++) {
+				int A[]=g.get(i);
+				int s=A[A.length-1];
+				if (s%2!=0) {
+					System.out.println(0);
+				}
+				else {
+					System.out.println();
+				}
+				
+			}
+	        scan.close();
+	    }
+	public static long X_2(long count) {
+		int a=2>>count;
+		return a;
+	}
+}

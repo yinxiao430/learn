@@ -1,0 +1,42 @@
+package practice;
+
+import java.util.Scanner;
+public class Test4 {
+
+	public static void main(String[] args) {
+		 Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+		 int N=scan.nextInt();
+		 scan.nextLine();
+		 char [][]p=new char [N][N];
+		 for (int i = 0; i < N; i++) {		
+				 String line=scan.nextLine();
+				p[i]=line.toCharArray();						
+		}
+		 boolean [][]visited=new boolean [N][N];
+		 int count=0;
+		 int daoyucount=daoyunum_dfs(p, visited, 0, 0, N, count);
+		 System.out.println(daoyucount);
+		 
+	     scan.close();
+
+	}
+	static int []fangxiang_x= {1,0,-1,0};
+	static int []fangxiang_y= {0,1,0,-1};
+	public static int daoyunum_dfs(char p[][],boolean visited[][],int x,int y,int N,int count) {
+		if(x>=N||x<0||y>=N||y<0||p[y][x]!='#'||visited[y][x]==true) {		
+			return count;
+		}
+		for (int i = 0; i < 4; i++) {
+			int tx=x+fangxiang_x[i];
+			int ty=y+fangxiang_y[i];
+			if(p[y][x]=='#'&&visited[ty][tx]==false) {
+				count++;
+				visited[ty][tx]=true;
+				daoyunum_dfs(p, visited, tx, ty, N, count);
+			}
+		}		
+		return count;
+	}
+
+}

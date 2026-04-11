@@ -1,0 +1,76 @@
+package practice;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.Scanner;
+
+// 1:无需package
+// 2: 类名必须Main, 不可修改
+
+public class Test18 {
+	private static int n;
+    private static boolean visit[];
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        //在此输入您的代码...
+        n=scan.nextInt();
+        int m=scan.nextInt();
+        int Q=scan.nextInt();
+        int g[][]=new int[n][n];
+        for (int i = 0; i < m; i++) {
+			int a=scan.nextInt();
+			int b=scan.nextInt();
+			g[a][b]=1;
+			g[b][a]=1;
+		}
+        int xy[][]=new int [Q][2];
+        for (int i = 0; i < Q; i++) {
+			for (int j = 0; j < 2; j++) {
+				xy[i][j]=scan.nextInt();
+			}
+		}
+        ArrayList<Integer> re=new ArrayList<Integer>();
+        
+        for (int i = 0; i < Q; i++) {
+        	for (int j = 0; j < n; j++) {
+        		visit[i]=false;
+        	}
+			bfs(g, xy[i][0], xy[i][1]);
+			int count=0;
+			for (int j = 0; j < n; j++) {
+				if (visit[j]==true) {
+					count++;
+				}
+			}
+			re.add(count);
+		}
+        int sum=0;
+        for (int i = 0; i < re.size(); i++) {
+			sum+=re.get(i);
+		}
+        double result=sum/n;
+        System.out.printf("%.2f",result);
+        scan.close();
+    }
+  
+    public static void bfs(int g[][],int start,int step) {
+    	visit=new boolean[n]; 
+		visit[start]=true;
+		ArrayDeque<Integer> deque=new ArrayDeque<Integer>();
+		deque.add(start);
+		while (!deque.isEmpty()) {
+			start=deque.poll();
+			for (int i = 0; i < n; i++) {
+				if (visit[i]==false&&g[start][i]==1) {	
+					visit[i]=true;
+					deque.add(i);			
+				}		
+			}
+			step--;
+			if (step==0) {
+				return;
+			}	
+		}
+	}
+    
+}

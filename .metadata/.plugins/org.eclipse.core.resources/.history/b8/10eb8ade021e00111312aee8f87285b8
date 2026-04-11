@@ -1,0 +1,21 @@
+package practice;
+
+public class Test7 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for (int i = 10; i < 100; i++) {
+			int a=20240413;		
+			int b=num(a,i);
+			int N=b-20250412;
+			int d=N+a;
+			if((d%20250412)==0) {
+				System.out.println(N);
+			}
+			
+		}
+	}
+	public static int num(int a,int i) {
+		return a*i;
+	}
+}

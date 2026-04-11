@@ -1,0 +1,78 @@
+package practice;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import sun.awt.geom.AreaOp.AddOp;
+
+//哈希表
+public class Test12 {
+	  public static void main(String[] args) {
+	        Scanner scan = new Scanner(System.in);
+	        //在此输入您的代码...
+	        int n=scan.nextInt();
+	        int [] a=new int [n];
+	        for (int i = 0; i < n; i++) {
+				a[i]=scan.nextInt();
+			}
+	        Map<Integer, ArrayList<Integer>> hash=new HashMap<Integer, ArrayList<Integer>>();
+	        int count=1;
+	        int currentnum=a[0];
+	        for (int i = 1; i < n; i++) {
+				if(a[i]==currentnum) {
+					count++;
+				}else {
+					hash.computeIfAbsent(currentnum, k->new ArrayList<Integer>()).add(count);
+					count=1;
+					currentnum=a[i];
+				}
+			} 
+	        hash.computeIfAbsent(currentnum, k->new ArrayList<Integer>()).add(count);
+	        ArrayList<Integer> key=new ArrayList<Integer>(hash.keySet());
+	        int sum[]=new int[key.size()]; 
+	        for (int i = 0; i < hash.size(); i++) { 
+	        	int crrukey=key.get(i);
+	        	System.out.println("key:"+crrukey);
+				ArrayList<Integer > value=hash.get(crrukey);
+				int twomaxadd=maxtwonum(value);
+				System.out.println("add:"+twomaxadd);
+				sum[i]=twomaxadd*crrukey;
+			}
+	        int result=0;
+	        for (int i = 0; i < sum.length; i++) {
+				if(sum[i]>result) {
+					result=sum[i];
+				}
+			}
+	        
+	        System.out.println(result);
+	        scan.close();
+	    }
+	  public static int maxtwonum(ArrayList<Integer> list) {
+		  int len=list.size();
+		  ArrayList<Integer > templist=new ArrayList<Integer>(list);
+		  if(len<2) {
+			  return templist.get(0);
+		  }
+		  else if(len==2) {
+			  return templist.get(0)+templist.get(1);
+		  }
+		  else {
+			  int max[]=new int [2];
+			  for (int i = 0; i < 2; i++) {
+				  int m=0;
+				  int index=0;
+				for (int j = 0; j < len; j++) {
+					if(templist.get(j)>m) {
+						m=templist.get(j);
+						index=j;
+					}			        
+				}
+				templist.remove(index);
+				max[i]=m;			
+			}
+			  return max[0]+max[1];
+		  }
+	}
+}

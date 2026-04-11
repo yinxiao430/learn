@@ -1,0 +1,54 @@
+package practice;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Test15 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        	Scanner scan = new Scanner(System.in);
+		        //在此输入您的代码...
+        	for (int j = 0; j < 1000000; j++) {
+				int n=j;
+	        	ArrayList<Integer> fblaxi=new ArrayList<Integer>();
+	        	int temp=n;
+	        	while (true) {
+					int a=temp%10;
+					fblaxi.add(a);
+					temp=temp/10;
+					if (temp==0) {
+						break;
+					}
+				}
+	        	
+	        	Collections.reverse(fblaxi);
+//	        	for (int i = 0; i < fblaxi.size(); i++) {
+//					System.out.println(fblaxi.get(i));
+//				}
+	        	while (true) {
+					int size=fblaxi.size();
+					int a1=fblaxi.get(size-1);
+					int a2=fblaxi.get(size-2);
+					int a3=fblaxi.get(size-3);
+					int a123=a1+a2+a3;
+					fblaxi.add(a1+a2+a3);
+					if (a123>=n) {
+						break;
+					}				
+				}
+	        	int sizemax=fblaxi.size();
+	        	if (fblaxi.get(sizemax-1)==n) {
+					System.out.println(n);
+				}
+	        	
+			}
+        	
+	        scan.close();
+	}
+
+
+}
